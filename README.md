@@ -7,13 +7,13 @@
 
 ---
 
-## 🎬 最终成片（1080P · 60fps · 29.2s）
+## 🎬 最终成片（v1.1.0 导演精剪版 · 1080P · 60fps · 27.3s）
 
 - **🎥 在线放映页（GitHub Pages）**：https://nonoking123456.github.io/apex-zero-demo/
-- **📦 Release v1.0.0 原片下载**：[下载 `APEX_ZERO_1080P_60fps.mp4` (33.6 MB)](https://github.com/NonoKing123456/apex-zero-demo/releases/download/v1.0.0/APEX_ZERO_._30s_FINAL_1080P.mp4) · [查看 Release 页面](https://github.com/NonoKing123456/apex-zero-demo/releases/tag/v1.0.0)
-- **📁 仓库本地成片路径**：[`outputs/APEX_ZERO_零号弯道_30s_FINAL_1080P.mp4`](outputs/APEX_ZERO_零号弯道_30s_FINAL_1080P.mp4)（`1920×1080`，`60fps`，`48kHz Stereo AAC`）
+- **📦 Release v1.1.0 原片下载**：[下载 `APEX_ZERO_v1.1_1080P_60fps.mp4` (31.7 MB)](https://github.com/NonoKing123456/apex-zero-demo/releases/download/v1.1.0/APEX_ZERO_._30s_FINAL_1080P.mp4) · [查看 Release 页面](https://github.com/NonoKing123456/apex-zero-demo/releases/tag/v1.1.0)
+- **📁 仓库本地成片路径**：[`outputs/APEX_ZERO_零号弯道_30s_FINAL_1080P.mp4`](outputs/APEX_ZERO_零号弯道_30s_FINAL_1080P.mp4)（`1920×1080`，`60fps`，`-14 LUFS` 母带标准化）
 - **画风定位**：低饱和莫兰迪冷灰蓝 + 珊瑚粉橘点缀 + 逆光空气发丝光晕
-- **剪辑亮点**：反派男声 L-Cut 玩梗开场、S03 点火爆灯踩鼓点、S04→S05 高潮 0.8s 嘴角微挑极速闪切、S06 破晓 BGM 骤降凸显引擎熄火余温滴答声、结尾 55Hz 电影低音炮“咚” + 极简珊瑚橘细线片名卡
+- **v1.1 导演精剪亮点**：暗黑工业重低音电影配乐、真侧链平滑 Ducking 混音、隧道/破晓空间微混响、S03 爆灯 3 帧瞬闪弹射、完整 5 秒 S05 火星压弯一气呵成、合成 Riser/Whoosh/Sub-Drop 转场声效、零串镜压脸字幕与 `-14 LUFS` 平台标准母带响度
 
 ---
 

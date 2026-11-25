@@ -11,6 +11,7 @@ Thumbs.db
 
 # Ignore scratch / legacy test outputs and temp build files
 outputs/build_tmp/
+outputs/build_tmp_v2/
 outputs/videos/
 outputs/audio/
 outputs/route3_*
