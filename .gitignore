@@ -1,0 +1,22 @@
+# Ignore local ComfyUI, models, scripts, and intermediate build artifacts
+ComfyUI/
+workflows/
+*.bat
+*.ps1
+*.log
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+
+# Ignore scratch / legacy test outputs and temp build files
+outputs/build_tmp/
+outputs/videos/
+outputs/audio/
+outputs/route3_*
+outputs/test_iter*
+outputs/voices_*.json
+inputs/3d/
+inputs/hero_portrait_v2.png
+
+ComfyUI_LOCAL_NOTES.md
