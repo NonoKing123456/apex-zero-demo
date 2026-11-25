@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>APEX ZERO | 零号弯道 — 30s AI Cinema Demo</title>
+  <meta name="description" content="零号弯道 APEX ZERO：30 秒 2.5D 半厚涂国漫 × 赛博重机 AI 漫剧先导 Demo（1080P 60fps 全链路作品集）" />
+  <style>
+    :root {
+      --bg: #07090e;
+      --bg-card: #10141e;
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #eef1f6;
+      --muted: #8c96a8;
+      --coral: #e08e79;
+      --ice: #6ec4f5;
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background:
+        radial-gradient(900px 480px at 14% 6%, rgba(110, 196, 245, 0.10), transparent 65%),
+        radial-gradient(760px 420px at 88% 12%, rgba(224, 142, 121, 0.11), transparent 65%),
+        var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+    /* Nav */
+    header {
+      position: sticky; top: 0; z-index: 40;
+      backdrop-filter: blur(14px);
+      background: rgba(7, 9, 14, 0.72);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 12px;
+      letter-spacing: 0.22em; font-weight: 700; font-size: 14px;
+    }
+    .brand-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--coral);
+      box-shadow: 0 0 12px var(--coral);
+    }
+    .nav-links { display: flex; gap: 24px; font-size: 13px; color: var(--muted); }
+    .nav-links a:hover { color: var(--text); }
+
+    /* Hero + Cinema Player */
+    .hero { padding: 52px 0 36px; text-align: center; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 14px; border-radius: 999px;
+      border: 1px solid rgba(224, 142, 121, 0.35);
+      background: rgba(224, 142, 121, 0.08);
+      color: var(--coral); font-size: 12px; letter-spacing: 0.16em;
+      text-transform: uppercase; margin-bottom: 18px;
+    }
+    h1 {
+      font-size: clamp(32px, 5vw, 56px);
+      letter-spacing: 0.22em; font-weight: 700;
+      line-height: 1.15; margin-bottom: 10px;
+    }
+    .subtitle {
+      font-size: clamp(16px, 2.2vw, 22px);
+      letter-spacing: 0.32em; color: #cfd6e3; margin-bottom: 14px;
+    }
+    .hero-desc {
+      max-width: 720px; margin: 0 auto 28px;
+      color: var(--muted); font-size: 14px;
+    }
+    .cta-row {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;
+      margin-bottom: 34px;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 22px; border-radius: 999px; font-size: 14px; font-weight: 600;
+      border: 1px solid var(--border); transition: all 0.2s ease; cursor: pointer;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--coral), #c96f5b);
+      color: #090b10; border-color: transparent;
+      box-shadow: 0 8px 26px rgba(224, 142, 121, 0.28);
+    }
+    .btn-primary:hover { transform: translateY(-1px); filter: brightness(1.06); }
+    .btn-ghost { background: rgba(255, 255, 255, 0.04); color: var(--text); }
+    .btn-ghost:hover { border-color: rgba(110, 196, 245, 0.5); background: rgba(110, 196, 245, 0.08); }
+
+    .cinema-wrap {
+      position: relative;
+      border-radius: 18px;
+      padding: 2px;
+      background: linear-gradient(135deg, rgba(110, 196, 245, 0.45), rgba(224, 142, 121, 0.45), rgba(255,255,255,0.08));
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.72), 0 0 60px rgba(110, 196, 245, 0.08);
+      max-width: 1040px; margin: 0 auto;
+    }
+    .cinema-inner {
+      background: #040508; border-radius: 16px; overflow: hidden;
+      position: relative; aspect-ratio: 16 / 9;
+    }
+    video {
+      width: 100%; height: 100%; display: block; object-fit: cover; background: #000;
+    }
+    .specs-bar {
+      max-width: 1040px; margin: 16px auto 0;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+    }
+    .spec-pill {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 12px 14px; text-align: left;
+    }
+    .spec-label { font-size: 11px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+    .spec-val { font-size: 15px; font-weight: 600; margin-top: 2px; color: var(--text); }
+
+    /* Sections */
+    section { padding: 54px 0; }
+    .sec-head {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      gap: 16px; margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 14px;
+    }
+    .sec-tag { font-size: 11px; letter-spacing: 0.2em; color: var(--coral); text-transform: uppercase; }
+    .sec-title { font-size: 24px; font-weight: 700; margin-top: 4px; }
+    .sec-sub { font-size: 13px; color: var(--muted); }
+
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+      transition: transform 0.22s ease, border-color 0.22s ease;
+      cursor: zoom-in;
+    }
+    .card:hover { transform: translateY(-3px); border-color: rgba(224, 142, 121, 0.45); }
+    .card img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; }
+    .card-body { padding: 14px 16px; }
+    .card-meta {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 11px; color: var(--ice); letter-spacing: 0.08em; margin-bottom: 6px;
+    }
+    .card-title { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+    .card-quote { font-size: 12.5px; color: var(--muted); }
+
+    .pipeline-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .pipe-step {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 18px;
+    }
+    .pipe-num { font-size: 12px; color: var(--coral); font-weight: 700; letter-spacing: 0.12em; }
+    .pipe-step h3 { font-size: 15px; margin: 6px 0 8px; }
+    .pipe-step p { font-size: 12.5px; color: var(--muted); }
+
+    footer {
+      border-top: 1px solid var(--border); padding: 32px 0 46px;
+      text-align: center; font-size: 13px; color: var(--muted);
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 100;
+      background: rgba(4, 6, 10, 0.92); backdrop-filter: blur(8px);
+      display: none; align-items: center; justify-content: center; padding: 24px;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 94vw; max-height: 86vh; border-radius: 12px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.85);
+    }
+    .lightbox-cap {
+      position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%);
+      background: rgba(16, 20, 30, 0.9); border: 1px solid var(--border);
+      padding: 8px 18px; border-radius: 999px; font-size: 13px; color: var(--text);
+    }
+
+    @media (max-width: 900px) {
+      .grid-3, .pipeline-grid { grid-template-columns: repeat(2, 1fr); }
+      .specs-bar { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .grid-3, .pipeline-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav-inner">
+      <div class="brand">
+        <span class="brand-dot"></span>
+        <span>APEX ZERO</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#cinema">成片放映</a>
+        <a href="#assets">核心资产</a>
+        <a href="#storyboard">分镜画廊</a>
+        <a href="#pipeline">制作管线</a>
+        <a href="https://github.com/NonoKing123456/apex-zero-demo" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero" id="cinema">
+      <div class="eyebrow">Original AI Cinema Demo · 1080P 60FPS</div>
+      <h1>APEX ZERO</h1>
+      <div class="subtitle">零 号 弯 道</div>
+      <p class="hero-desc">
+        30 秒 2.5D 唯美韩漫半厚涂 × 3D 半写实国漫 · 都市暗夜地下重机飙车先导样片。<br />
+        资产先行 → 多图垫底 2K 首帧 → Seedance 2.5 分段节拍图生视频（6/6 零废片）→ FFmpeg 全代码 1080P 60fps 精剪混音。
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://github.com/NonoKing123456/apex-zero-demo/releases/download/v1.0.0/APEX_ZERO_._30s_FINAL_1080P.mp4" download>
+          ⬇ 下载 1080P 原片 (Release v1.0.0)
+        </a>
+        <a class="btn btn-ghost" href="https://github.com/NonoKing123456/apex-zero-demo/releases/tag/v1.0.0" target="_blank" rel="noopener">
+          查看 Release v1.0.0
+        </a>
+        <a class="btn btn-ghost" href="https://github.com/NonoKing123456/apex-zero-demo" target="_blank" rel="noopener">
+          源码与避坑文档
+        </a>
+      </div>
+
+      <div class="cinema-wrap">
+        <div class="cinema-inner">
+          <video controls playsinline preload="metadata" poster="outputs/keyframes/S05.png">
+            <source src="outputs/APEX_ZERO_%E9%9B%B6%E5%8F%B7%E5%BC%AF%E9%81%93_30s_FINAL_1080P.mp4" type="video/mp4" />
+            <source src="https://github.com/NonoKing123456/apex-zero-demo/releases/download/v1.0.0/APEX_ZERO_._30s_FINAL_1080P.mp4" type="video/mp4" />
+            您的浏览器不支持 HTML5 视频播放，请点击上方按钮下载 1080P 原片观看。
+          </video>
+        </div>
+      </div>
+
+      <div class="specs-bar">
+        <div class="spec-pill">
+          <div class="spec-label">Resolution &amp; FPS</div>
+          <div class="spec-val">1920×1080 · 60fps</div>
+        </div>
+        <div class="spec-pill">
+          <div class="spec-label">Duration</div>
+          <div class="spec-val">29.2s 黄金预告节奏</div>
+        </div>
+        <div class="spec-pill">
+          <div class="spec-label">Video Pass Rate</div>
+          <div class="spec-val">6 / 6 一发入魂</div>
+        </div>
+        <div class="spec-pill">
+          <div class="spec-label">Audio Master</div>
+          <div class="spec-val">7 轨混音 + 55Hz Boom</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="assets">
+      <div class="sec-head">
+        <div>
+          <div class="sec-tag">01 · Assets First</div>
+          <h2 class="sec-title">三大核心前置视觉资产</h2>
+        </div>
+        <div class="sec-sub">先锁人、车、景三视图母版，再多图参考出分镜（点击图片放大）</div>
+      </div>
+      <div class="grid-3">
+        <article class="card" data-cap="资产 1：女主林汐 4 视图母版（低饱和珊瑚橘×象牙白机能短装 / 10cm 白橘细高跟）">
+          <img src="inputs/hero_female_4view_master.jpg" alt="女主 4 视图母版" loading="lazy" />
+          <div class="card-body">
+            <div class="card-meta"><span>CHARACTER</span><span>4-VIEW MASTER</span></div>
+            <div class="card-title">主角 · 林汐（Lin Xi）</div>
+            <div class="card-quote">冷茶棕高马尾 · 珊瑚粉橘拼白机能皮衣 · 9.5 头身</div>
+          </div>
+        </article>
+        <article class="card" data-cap="资产 2：概念重型仿赛机车 3 视图（象牙白油箱 + 珊瑚橘前刹车卡钳 + 双刀锋前灯）">
+          <img src="inputs/asset_superbike_3view.jpg" alt="概念重型机车 3 视图" loading="lazy" />
+          <div class="card-body">
+            <div class="card-meta"><span>VEHICLE</span><span>3-VIEW MASTER</span></div>
+            <div class="card-title">本命座驾 · 概念重型仿赛</div>
+            <div class="card-quote">象牙白油箱 × 哑光钛银 × 珊瑚橘刹车卡钳 CP 呼应</div>
+          </div>
+        </article>
+        <article class="card" data-cap="资产 3：雨夜螺旋高架隧道急弯空镜（零悬空光源穿帮 / 冰蓝+珊瑚橘克制霓虹）">
+          <img src="inputs/asset_env_rainy_tunnel.png" alt="雨夜螺旋高架隧道空镜" loading="lazy" />
+          <div class="card-body">
+            <div class="card-meta"><span>ENVIRONMENT</span><span>SET DESIGN</span></div>
+            <div class="card-title">核心空间 · 零号螺旋弯道</div>
+            <div class="card-quote">斜向弧形立柱 · 莫兰迪冷灰蓝 · 镜面积水倒影</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="storyboard">
+      <div class="sec-head">
+        <div>
+          <div class="sec-tag">02 · Keyframes Gallery</div>
+          <h2 class="sec-title">全片 6 镜 2K 定稿首帧画廊</h2>
+        </div>
+        <div class="sec-sub">Seedream 5.5 多资产垫图生成 · 点击任意镜头查看 2K 原图</div>
+      </div>
+      <div class="grid-3">
+        <article class="card" data-cap="S01 (00:00–00:04) · “三年前，零号弯道废了三台车……你踩着十厘米高跟鞋，上赛道？”">
+          <img src="outputs/keyframes/S01.png" alt="S01 高跟踩水" loading="lazy" />
+          <div class="card-body">
+            <div class="card-meta"><span>SHOT 01</span><span>00:00 – 00:04</span></div>
+            <div class="card-title">高跟踩水钩子</div>
+            <div class="card-quote">“三年前零号弯道废了三台车——你踩着十厘米高跟鞋上赛道？”</div>
+          </div>
+        </article>
+        <article class="card" data-cap="S02 (00:04–00:08) · “那是因为，他们只会踩刹车。”">
+          <img src="outputs/keyframes/S02.png" alt="S02 逆光回眸" loading="lazy" />
+          <div class="card-body">
+            <div class="card-meta"><span>SHOT 02</span><span>00:04 – 00:08</span></div>
+            <div class="card-title">逆光回眸 · 颜值暴击</div>
+            <div class="card-quote">“那是因为，他们只会踩刹车。”</div>
+          </div>
+        </article>
+        <article class="card" data-cap="S03 (00:08–00:12) · 前 2s 收白靴踏脚蹬 → 后 2s 双刀锋冷白大灯爆亮 + 四缸咆哮">
+          <img src="outputs/keyframes/S03.png" alt="S03 跨坐点火爆灯" loading="lazy" />
+          <div class="card-body">
+            <div class="card-meta"><span>SHOT 03</span><span>00:08 – 00:12</span></div>
+            <div class="card-title">跨坐蓄势 · 点火爆灯</div>
+            <div class="card-quote">前 2s 收脚踏蹬 → 后 2s 双刀锋冷白大灯骤亮咆哮</div>
+          </div>
+        </article>
+        <article class="card" data-cap="S04 (00:12–00:15.5 + 0.8s 闪切) · “零号弯道，没有刹车线。”">
+          <img src="outputs/keyframes/S04.png" alt="S04 俯身狂飙怼脸" loading="lazy" />
+          <div class="card-body">
+            <div class="card-meta"><span>SHOT 04</span><span>00:12 – 00:15.5</span></div>
+            <div class="card-title">俯身狂飙 · 车头怼脸</div>
+            <div class="card-quote">“零号弯道，没有刹车线。”（末秒微挑嘴角闪切进 S05）</div>
+          </div>
+        </article>
+        <article class="card" data-cap="S05 (00:15.5–00:21.3) · 螺旋急弯极限压弯，金橘火星交织破水水墙甩开追车">
+          <img src="outputs/keyframes/S05.png" alt="S05 螺旋急弯极限压弯" loading="lazy" />
+          <div class="card-body">
+            <div class="card-meta"><span>SHOT 05</span><span>00:15.5 – 00:21.3</span></div>
+            <div class="card-title">螺旋急弯 · 冰火极限压弯</div>
+            <div class="card-quote">车底金橘火星 × 后胎冰蓝水墙 × 猩红尾灯螺旋光轨</div>
+          </div>
+        </article>
+        <article class="card" data-cap="S06 (00:21.3–00:26.3) · “下一局，赌你的全部。”">
+          <img src="outputs/keyframes/S06.png" alt="S06 破晓终点倚车定格" loading="lazy" />
+          <div class="card-body">
+            <div class="card-meta"><span>SHOT 06</span><span>00:21.3 – 00:26.3</span></div>
+            <div class="card-title">破晓终点 · 倚车定格</div>
+            <div class="card-quote">“下一局，赌你的全部。” → 黑屏 55Hz 低音炮出片名</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="pipeline">
+      <div class="sec-head">
+        <div>
+          <div class="sec-tag">03 · Production Pipeline</div>
+          <h2 class="sec-title">端到端工业化生产管线</h2>
+        </div>
+        <div class="sec-sub">全过程脚本、提示词与 11 条避坑实战经验均开源在仓库</div>
+      </div>
+      <div class="pipeline-grid">
+        <div class="pipe-step">
+          <div class="pipe-num">STEP 01</div>
+          <h3>资产先行</h3>
+          <p>Seedream 5.5 生成 4 视图女主、3 视图重机与螺旋隧道空镜，从源头锁定画风与配色呼应。</p>
+        </div>
+        <div class="pipe-step">
+          <div class="pipe-num">STEP 02</div>
+          <h3>多图首帧防穿帮</h3>
+          <p>引入防 4 视图分身锁句、45° 错落步态、禁同侧双腿与禁停车侧撑，稳定产出 6 张 2K 首帧。</p>
+        </div>
+        <div class="pipe-step">
+          <div class="pipe-num">STEP 03</div>
+          <h3>CLI 串行生视频</h3>
+          <p>通过即梦 CLI 调用 Seedance 2.5（720p 60fps），采用分段节拍法 + 禁口型，6/6 一发入魂。</p>
+        </div>
+        <div class="pipe-step">
+          <div class="pipe-num">STEP 04</div>
+          <h3>FFmpeg 全代码精剪</h3>
+          <p>Python + FFmpeg 8.0 自动超分 1080P、统一莫兰迪调色、闪切、7 轨 Ducking 混音与 ASS 字幕。</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      APEX ZERO | 零号弯道 · Built with Seedream 5.5, Seedance 2.5, Jimeng CLI &amp; FFmpeg 8.0 ·
+      <a href="https://github.com/NonoKing123456/apex-zero-demo" style="color: var(--coral);">GitHub Repository</a>
+    </div>
+  </footer>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <img id="lb-img" src="" alt="" />
+    <div class="lightbox-cap" id="lb-cap"></div>
+  </div>
+
+  <script>
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lb-img');
+    const lbCap = document.getElementById('lb-cap');
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('click', () => {
+        const img = card.querySelector('img');
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+        lbCap.textContent = card.dataset.cap || img.alt;
+        lb.classList.add('open');
+        lb.setAttribute('aria-hidden', 'false');
+      });
+    });
+    lb.addEventListener('click', () => {
+      lb.classList.remove('open');
+      lb.setAttribute('aria-hidden', 'true');
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') lb.classList.remove('open');
+    });
+  </script>
+</body>
+</html>

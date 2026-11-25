@@ -9,7 +9,9 @@
 
 ## 🎬 最终成片（1080P · 60fps · 29.2s）
 
-- **主成片下载 / 播放**：[`outputs/APEX_ZERO_零号弯道_30s_FINAL_1080P.mp4`](outputs/APEX_ZERO_零号弯道_30s_FINAL_1080P.mp4)（33.6 MB，`1920×1080`，`60fps`，`48kHz Stereo AAC`）
+- **🎥 在线放映页（GitHub Pages）**：https://nonoking123456.github.io/apex-zero-demo/
+- **📦 Release v1.0.0 原片下载**：[下载 `APEX_ZERO_1080P_60fps.mp4` (33.6 MB)](https://github.com/NonoKing123456/apex-zero-demo/releases/download/v1.0.0/APEX_ZERO_._30s_FINAL_1080P.mp4) · [查看 Release 页面](https://github.com/NonoKing123456/apex-zero-demo/releases/tag/v1.0.0)
+- **📁 仓库本地成片路径**：[`outputs/APEX_ZERO_零号弯道_30s_FINAL_1080P.mp4`](outputs/APEX_ZERO_零号弯道_30s_FINAL_1080P.mp4)（`1920×1080`，`60fps`，`48kHz Stereo AAC`）
 - **画风定位**：低饱和莫兰迪冷灰蓝 + 珊瑚粉橘点缀 + 逆光空气发丝光晕
 - **剪辑亮点**：反派男声 L-Cut 玩梗开场、S03 点火爆灯踩鼓点、S04→S05 高潮 0.8s 嘴角微挑极速闪切、S06 破晓 BGM 骤降凸显引擎熄火余温滴答声、结尾 55Hz 电影低音炮“咚” + 极简珊瑚橘细线片名卡
 
